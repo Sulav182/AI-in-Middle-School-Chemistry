@@ -1,0 +1,99 @@
+﻿sorts
+    #object={clay,water,wax,oil,alcohol}.
+    #val=1..1000.
+predicates
+        %mass_Of(X,Y) denotes Y is the mass of substance X.
+                mass_Of(#object,#val).
+
+
+        % vol_Of(X,Y) denotes Y is the volume of substance X.
+        vol_Of(#object,#val).
+
+
+        % den_Of(X,Y) denotes Y is the density of substance X.
+den_Of(#object,#val).        
+
+
+        %has_greater_den(X,Y) denotes X substance has greater density than substance Y.
+        has_greater_den(#object,#object).
+
+
+        %liquid(X) denotes X is liquid.
+        liquid(#object).
+
+
+        %float(X,Y) denotes X is float on Y if X has greater density than Y.
+float(#object,#object). 
+
+
+        %sink(X,Y) denotes X is float on Y if X has greater density than Y.
+        sink(#object,#object).
+rules
+        % mass of clay is 90g.
+        mass_Of(clay,90). 
+
+
+        % mass of wax is 70g.
+        mass_Of(wax,70).
+
+
+        % mass of water is 85g
+         mass_Of(water,80).
+
+
+         %mass of oil is 60g.
+        mass_Of(oil, 60).
+
+
+        %mass of alcohol is 50g.
+        mass_Of(alcohol, 50).
+
+
+            % volume of clay is 10 
+        vol_Of(clay,10).
+ 
+         % volume of wax is 10
+        vol_Of(wax,10).
+
+
+        % volume of water is 10.
+        vol_Of(water,10). 
+
+
+           %vol of oil is 10
+        vol_Of(oil,10).
+
+
+        %vol of alcohol is 10.
+        vol_Of(alcohol, 10).
+        
+        %oil is liquid
+        liquid(oil).
+
+
+        %alcohol is liquid.
+        liquid(alcohol).
+
+
+        % water is liquid.
+        liquid(water).
+
+
+
+
+        % density of  substance X  is Y if mass of X is A and volume of X is B then Y = A/B.
+        den_Of(X,Y):-mass_Of(X,A),vol_Of(X,B), Y=A/B.
+
+
+% density of substance X is greater than substance Y if value of density of X is         greater  than value substance Y      
+        has_greater_den(X,Y):- den_Of(X,A),den_Of(Y,B),A>B, X!=Y.
+
+
+        % X floats on Y if density of X is less than density of Y and Y is liquid
+        float(X,Y) :- den_Of(X,A),den_Of(Y,B), A<B, liquid(Y).
+        float(X,Y) :- den_Of(X,A),den_Of(Y,B), A<B, liquid(Y),liquid(X).
+
+
+    % X sinks on Y if density of X is greater than density of Y and Y is liquid
+        sink(X,Y) :- den_Of(X,A),den_Of(Y,B), A>B, liquid(Y).
+        sink(X,Y) :- den_Of(X,A),den_Of(Y,B), A>B, liquid(Y),liquid(X).
