@@ -1,0 +1,177 @@
+﻿sorts
+    
+        #elements = {h,c,o,k,cl}.
+        #num = {1,2,3,4,5,6,7,8,9,10}.
+        #rxn={rxn_1,rxn_2}.
+        #substance={h2o2,kclo3,h2o,o2,kcl,co2,h2co3}.
+        #val=1..20.
+   
+   
+
+
+predicates
+            
+        %has_reactant(R,B) denotes reaction R has reactant B.
+        has_reactant(#rxn,#substance).
+        
+           %has_product(R,B) denotes reaction R has product B.
+        has_product(#rxn,#substance).
+
+
+        %has_atom(S,N,A) denotes substance S has N number of A atoms.
+        has_atom(#substance,#num,#elements).
+
+
+        %num_molecule(R,N,S) denotes N number of substance S in reaction R.
+          num_molecule(#rxn,#num,#substance).
+   
+   
+           %is_balanced(R) denotes reaction R is balanced.
+             is_balanced(#rxn).
+    
+%atoms_in_substance_r(R,S,E,N) denotes N number of atoms E in a reactant's substance S of reaction R. 
+atoms_in_substance_r(#rxn,#substance,#elements,#val).
+    
+    %atoms_in__substance_p(R,S,E,N) denotes N number of atoms E in a product's substance S of reaction R.
+    atoms_in_substance_p(#rxn,#substance,#elements,#val).
+    
+    
+    %total_substance_reactant(R,N) denotes sum of atoms of each substance in reactant belonging to reaction R. 
+    total_substance_in_reactant(#rxn,#val).
+    
+    %total_substance_product(R,N) denotes sum of atoms of each substance in product belonging to reaction R.
+    total_substance_in_product(#rxn,#val).
+    totalR(#rxn,#elements,#val).
+    totalP(#rxn,#elements,#val).
+
+
+
+
+rules
+
+
+        % rexn_1= 2h2o2 ->2h2o + o2
+    
+                
+%Reaction_1 has reactant h2o2.
+        has_reactant(rxn_1,h2o2).
+        
+%Reaction_1 has product h2o.
+        has_product(rxn_1,h2o).
+        
+%Reaction_1 has product o2.
+        has_product(rxn_1,o2).
+        
+%Substance h2o2 has 2 atoms of hydrogen.
+        has_atom(h2o2,2,h).
+
+
+%Substance h2o2 has 2 atoms of oxygen.
+    has_atom(h2o2,2,o).
+        
+%Substance h2o has 2 atoms of hydrogen.
+        has_atom(h2o,2,h).
+        
+%Substance h2o has 1 atom of oxygen.
+        has_atom(h2o,1,o).
+        
+%Product o2 has 2 atoms of oxygen.
+        has_atom(o2,2,o).
+        
+%Reaction_1 has 2 number of substance h2o2.
+        num_molecule(rxn_1,2,h2o2).
+        
+%Reaction_1 has 2 number of product h2o.
+        num_molecule(rxn_1,2,h2o).
+        
+%Reaction_1 has 1 number of product o2.
+        num_molecule(rxn_1,1,o2).
+        
+        
+        % rexn_2= h2o + co2 ->h2co3
+        
+        %Reaction_2 has reactant h2o.
+        has_reactant(rxn_2,h2o).
+        
+%Reaction_2 has reactant co2.
+        has_reactant(rxn_2,co2).
+        
+%Reaction_2 has product h2co3.
+        has_product(rxn_2,h2co3).
+        
+%Substance h2co3 has 2 atoms of hydrogen..
+        has_atom(h2co3,2,h).
+
+
+%Substance h2co3 has 1 atoms of carbon.
+    has_atom(h2co3,1,c).
+        
+%Substance h2co3 has 3 atoms of oxygen.
+        has_atom(h2co3,3,o).
+        
+%Substance co2 has 1 atom of carbon.
+        has_atom(co2,1,c).
+        %Substance co2 has 2 atom of oxygen.
+        has_atom(co2,2,o).
+        
+        
+        
+%Product o2 has 2 atoms of oxygen.
+        has_atom(o2,2,o).
+        
+%Reaction_2 has 1 number of substance h2o.
+        num_molecule(rxn_2,1,h2o).
+        
+%Reaction_2 has 1 number of reactant o2.
+        num_molecule(rxn_2,1,co2).
+        
+%Reaction_2 has 1 number of product h2co3.
+        num_molecule(rxn_2,1,h2co3).
+
+
+
+
+
+
+        
+        
+        
+        % N is total number of E atom of reactant S belonging to reaction R if R has reactant S and number of molecules of reactant S is M and S has 
+        % O number of E atoms where total number of atom N is equal to product of number of molecules (M) of a reactant S and number of atoms (O) 
+        % in that substance. 
+        atoms_in_substance_r(R,S,E,N):-has_reactant(R,S),num_molecule(R,M,S),has_atom(S,O,E),N=M*O.
+        
+        
+                % N is total number of E atom of reactant S belonging to reaction R if R has reactant S and number of molecules of reactant S is M and S has 
+        % O number of E atoms where total number of atom N =M*O. 
+        
+        atoms_in_substance_r(R,S,E,N):-has_reactant(R,S),num_molecule(R,M,S),has_atom(S,O,E),N=M*O.
+        
+        
+        % N is total number of E atom of product S belonging to reaction R if R has product S and number of molecules of product S is M, and S has 
+        % O number of E atoms where total number of atom N =M*O.
+        
+        atoms_in_substance_p(R,S,E,N):-has_product(R,S),num_molecule(R,M,S),has_atom(S,O,E),N=M*O.
+        
+        
+  % Reaction R is balanced if there is no reason to believe it is not balanced.
+        is_balanced(R) :- not -is_balanced(R).
+
+
+% Reaction R is not balanced if for each atom, the total number of this atom in 
+    %Reactant is the not equal to that in the products.
+        -is_balanced(R):-totalR(R,A,N), totalP(R,A,M), N!=M.
+        
+        
+%totalR(R, A, N) denotes that the number of atom A in
+    %the reactants of R is N.
+
+
+    totalR(R,A,N):- #sum{NA,S: atoms_in_substance_r(R,S,A,NA)}=N.
+
+
+    %totalP(R, A, N) denotes that the number of atom A in
+    %the products of R is N.
+
+
+    totalP(R,A,N):- #sum{NA,S: atoms_in_substance_p(R,S,A,NA)}=N.
