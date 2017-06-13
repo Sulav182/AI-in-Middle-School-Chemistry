@@ -1,0 +1,230 @@
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SPARC file
+%% Author: Sulav, Topa, Sakshyam
+%% Description: SPARC program for listing properties
+%% of elements in periodic table
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+sorts
+   #item ={hydrogen,helium,lithium,beryllium,boron,carbon,nitrogen,oxygen,
+               fluorine,neon,sodium,magnesium,aluminium,silicon,phosphorous,sulphur,
+               chlorine,argon,potassium,calcium}.
+   #symbols = {h,he,li,be,b,c,n,o,f,ne,na,mg,al,si,p,s,cl,ar,k,ca}.
+   #num = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,
+               23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40}.
+
+
+predicates
+        symbolOf(#item,#symbols). % symbolOf(X,Y) denotes Y is the symbol of X.
+        atomicMass(#symbols,#num).% atomicMass(X,Y) denotes Y is the atomic mass of %element 'X'
+        protonOf(#symbols,#num). %prontOf(X, Y) denotes Y is the number of protons in an %element 'X'
+        atomicNum(#symbols,#num). %atomicOf(X,Y) denotes Y is the atomic number of %element 'X '
+        electronOf(#symbols,#num).%electronOf(X, Y) denotes Y is the number of electron in an %element 'X'
+        neutronOf(#symbols,#num).%neutronOf(X, Y) denotes Y is the number of neutron in an %element 'X'
+        ve(#symbols,#num).% ve(X,Y) denotes Y is the number of valence electron in an %electron 'X'
+        group1(#symbols).% group1(X) denotes Y element on group1.
+        group2(#symbols).% group2(X) denotes Y element on group2.
+        group3(#symbols).% group3(X) denotes Y element on group3.
+        group4(#symbols).% group5(X) denotes Y element on group4.
+        group5(#symbols).% group5(X) denotes Y element on group5.
+        group6(#symbols).% group6(X) denotes Y element on group6.
+        group7(#symbols).% group7(X) denotes Y element on group7.
+        group8(#symbols).% group8(X) denotes Y element on group8.
+        
+
+
+rules
+         %Symbols
+         % h is the symbol of hydrogen.
+        symbolOf(hydrogen, h).
+         % he is the symbol of helium.
+        symbolOf(helium, he).
+         % li is the symbol of lithium.
+        symbolOf(lithium, li).
+         % be is the symbol of beryllium.
+        symbolOf(beryllium, be).
+         % b is the symbol of boron.
+        symbolOf(boron, b).
+         % c is the symbol of carbon.
+        symbolOf(carbon, c).
+         % n is the symbol of nitrogen.
+        symbolOf(nitrogen, n).
+         % o is the symbol of oxygen.
+        symbolOf(oxygen, o).
+         % f is the symbol of fluorine.
+        symbolOf(fluorine, f).
+         % ne is the symbol of neon.
+        symbolOf(neon, ne).
+         % na is the symbol of sodium.
+        symbolOf(sodium, na).
+         % mg is the symbol of magnesium.
+        symbolOf(magnesium, mg).
+         % al is the symbol of aluminium.
+        symbolOf(aluminium, al).
+         % si is the symbol of silicon.
+        symbolOf(silicon, si).
+         % p is the symbol of phosphorous.
+        symbolOf(phosphorous, p).
+         % s is the symbol of sulphur.
+        symbolOf(sulphur, s).
+         % cl is the symbol of chlorine.
+        symbolOf(chlorine, cl).
+         % ar is the symbol of argon.
+        symbolOf(argon, ar).
+         % k is the symbol of potassium.
+        symbolOf(potassium, k).
+         % ca is the symbol of calcium.
+        symbolOf(calcium, ca).
+% Proton Number
+        protonOf(h, 1).
+        % proton number of helium is 4.
+        protonOf(he, 2).
+        % proton number of lithium is 7.
+        protonOf(li, 3).
+        % proton number of beryllium is 9.
+        protonOf(be, 4).
+        % proton number of boron is 11.
+        protonOf(b, 5).
+        % proton number of carbon is 12.
+        protonOf(c, 6).
+        % proton number of nitrogen is 14.
+        protonOf(n, 7).
+        % proton number of oxygen is 16.
+        protonOf(o, 8).
+        % proton number of fluorine is 19.
+        protonOf(f, 9).
+        %proton number of neon is 20.
+        protonOf(ne, 10).
+        %proton number of sodium is 23.
+        protonOf(na, 11).
+        % proton number of magnesium is 24.
+        protonOf(mg, 12).
+        % proton number of aluminium is 27.
+        protonOf(al, 13).
+        %proton number of silicon is 28.
+        protonOf(si, 14).
+        % proton number of phosphorus is 31.
+        protonOf(p, 15).
+        % proton number of sulphur is 32.
+        protonOf(s, 16).
+        % proton number of chlorine is 35.
+        protonOf(cl, 17).
+        % proton number of argon is 40.
+        protonOf(ar, 18).
+        % proton number of potassium is 30.
+        protonOf(k, 19).    
+        % proton number of calcium is 40.
+        protonOf(ca, 20).         
+    
+            %Atomic Mass
+         % Atomic mass of hydrogen is 0.
+        atomicMass(h, 1).
+         % Atomic mass of helium is 4.
+        atomicMass(he, 4).
+        % Atomic mass of lithium is 7.
+        atomicMass(li, 7).
+        % Atomic mass of beryllium is 9.
+        atomicMass(be, 9).
+        % Atomic mass of boron is 11.
+        atomicMass(b, 11).
+        % Atomic mass of carbon is 12.
+        atomicMass(c, 12).
+        % Atomic mass of nitrogen is 14.
+        atomicMass(n, 14).
+        % Atomic mass of oxygen is 16.
+        atomicMass(o, 16).
+        % Atomic mass of fluorine is 19.
+        atomicMass(f, 19).
+        % Atomic mass of neon is 20.
+        atomicMass(ne, 20).
+        % Atomic mass of sodium is 23.
+        atomicMass(na, 23).
+        % Atomic mass of magnesium is 24.
+        atomicMass(mg, 24).
+        % Atomic mass of aluminium is 27.
+        atomicMass(al, 27).
+        % Atomic mass of silicon is 28.
+        atomicMass(si, 28).
+        % Atomic mass of phosphorus is 31.
+        atomicMass(p, 31).
+        % Atomic mass of sulphur is 32.
+        atomicMass(s, 32).
+        % Atomic mass of chlorine is 35.
+        atomicMass(cl, 35).
+        % Atomic mass of argon is 40.
+        atomicMass(ar, 40).
+        % Atomic mass of potassium is 30.
+        atomicMass(k, 30).    
+        % Atomic mass of calcium is 40.
+        atomicMass(ca, 40).
+        % group
+        % lithium belongs to group1.
+        group1(li).
+        %sodium belongs to group1.
+        group1(na).
+        %potassium belongs to group1.
+        group1(k).
+        %beryllium belongs to group2.
+        group2(be).
+        %magnesium belongs to group2.
+        group2(mg).
+        %calcium belongs to group2.
+        group2(ca).
+        %boron belongs to group3.
+        group3(b).
+        %aluminium belongs to group3.
+        group3(al).
+        %carbon belongs to group4.
+        group4(c).
+        %silicon belongs to group4.
+        group4(si).
+        %nitrogen belongs to group5.
+        group5(n).
+        %phosphorous belongs to group5.
+        group5(p).
+        %oxygen belongs to group6.
+        group6(o).
+        %sulphur belongs to group6.
+        group6(s).
+        %fluorine belongs to group7.
+        group7(f).
+        %chlorine belongs to group7.
+        group7(cl).
+        %helium belongs to group8.
+        group8(he).
+        %neon belongs to group8.
+        group8(ne).
+        %argon belongs to group8.
+        group8(ar).
+
+
+
+
+        % Y is the atomic number in 'X' element if Y is the proton number of 'X' element.
+        atomicNum(X,Y) :-protonOf(X,Y).
+
+
+        % Y is the number of electron in 'X' element if Y is the proton number of 'X' element.
+        electronOf(X,Y):-protonOf(X,Y).
+
+
+        % Y is the number of neutron in X element if atomic number of X element S is
+        % subtracted from atomic mass of X element Z.
+        neutronOf(X,Y):- atomicMass(X,S),atomicNum(X,Z), Y=S-Z.
+        %X has valence electron 1 if it belongs to group1.
+        ve(X,Y):-group1(X),Y=1.
+        %X has valence electron 2 if it belongs to group2.
+        ve(X,Y):-group2(X),Y=2.
+        %X has valence electron 3 if it belongs to group3.
+        ve(X,Y):-group3(X),Y=3.
+        %X has valence electron 4 if it belongs to group4.
+        ve(X,Y):-group4(X),Y=4.
+        %X has valence electron 5 if it belongs to group5.
+        ve(X,Y):-group5(X),Y=5.
+        %X has valence electron 6 if it belongs to group6.
+        ve(X,Y):-group6(X),Y=6.
+        %X has valence electron 7 if it belongs to group7.
+        ve(X,Y):-group7(X),Y=7.
+        %X has valence electron 8 or 0 if it belongs to group8.
+        ve(X,Y):-group8(X),Y=8.
